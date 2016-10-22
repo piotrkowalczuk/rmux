@@ -4,7 +4,7 @@ RESTful router, that supports path variables.
 
 ## Example 
 
-```
+```go
 mux := rmux.NewServeMux(rmux.ServeMuxOpts{})
 mux.Handle("GET/user/deactivate", http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 	rw.WriteHeader(http.StatusForbidden)
