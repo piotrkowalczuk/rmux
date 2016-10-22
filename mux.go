@@ -175,7 +175,7 @@ func (sm *ServeMux) split(p string) arguments {
 	}
 }
 
-// GoString implements gmt GoStringer interface.
+// GoString implements fmt GoStringer interface.
 func (sm *ServeMux) GoString() string {
 	b, err := json.MarshalIndent(sm.methods, "", "\t")
 	if err != nil {

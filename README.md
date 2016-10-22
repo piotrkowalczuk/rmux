@@ -1,4 +1,4 @@
-# rmux
+# rmux [![GoDoc](https://godoc.org/github.com/piotrkowalczuk/rmux?status.svg)](http://godoc.org/github.com/piotrkowalczuk/rmux)&nbsp;[![Build Status](https://travis-ci.org/piotrkowalczuk/rmux.svg)](https://travis-ci.org/piotrkowalczuk/rmux)&nbsp;[![codecov.io](https://codecov.io/github/piotrkowalczuk/rmux/coverage.svg?branch=master)](https://codecov.io/github/piotrkowalczuk/rmux?branch=master)
 
 RESTful router, that supports path variables.
 
