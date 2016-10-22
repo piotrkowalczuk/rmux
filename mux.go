@@ -108,9 +108,9 @@ func (sm *ServeMux) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 }
 
 func (sm *ServeMux) search(n *node, args *arguments) (http.Handler, bool) {
-	if args.len == 0 {
-		return nil, false
-	}
+	//if args.len == 1 {
+	//	return nil, false
+	//}
 
 	var (
 		nn *node
@@ -156,10 +156,6 @@ func (sm *ServeMux) search(n *node, args *arguments) (http.Handler, bool) {
 }
 
 func (sm *ServeMux) split(p string) arguments {
-	if p == "" {
-		return arguments{}
-	}
-
 	if strings.HasPrefix(p, "/") {
 		p = p[1:]
 	}
@@ -223,10 +219,6 @@ func newNode(res string, kind int) *node {
 }
 
 func (n *node) add(path []string, h http.Handler, idx int) *node {
-	if n == nil {
-		n = &node{}
-	}
-
 	// for example GET/
 	if len(path) == 0 && idx == 0 {
 		nn := &node{
@@ -253,10 +245,6 @@ func (n *node) add(path []string, h http.Handler, idx int) *node {
 	}
 
 	if isStatic(res) {
-		if n.static == nil {
-			n.static = map[string]*node{}
-		}
-
 		if nn, ok = n.static[res]; !ok {
 			nn = newNode(res, nodeKindStatic)
 		}

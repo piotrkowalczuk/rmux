@@ -50,6 +50,11 @@ func ExampleNewServeMux() {
 func TestServeMux_ServeHTTP(t *testing.T) {
 	sm := rmux.NewServeMux(rmux.ServeMuxOpts{
 		NotFound: http.NotFoundHandler(),
+		Interceptor: rmux.Interceptor(func(rw http.ResponseWriter, r *http.Request, h http.Handler) {
+			t.Log("interceptor fired")
+
+			h.ServeHTTP(rw, r)
+		}),
 	})
 	for pattern, given := range testPaths {
 		sm.Handle(pattern, func(pat, exp string) http.Handler {
