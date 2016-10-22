@@ -83,8 +83,8 @@ func TestServeMux_ServeHTTP(t *testing.T) {
 		})
 	}
 
-	t.Run("not found handler", func(t *testing.T){
-		resp, err := http.Get(ts.URL+"/SOMETHING-THAT-DOES-NOT-EXISTS")
+	t.Run("not found handler", func(t *testing.T) {
+		resp, err := http.Get(ts.URL + "/SOMETHING-THAT-DOES-NOT-EXISTS")
 		if err != nil {
 			t.Fatalf("unexpected error: %s", err.Error())
 		}
@@ -96,6 +96,7 @@ func TestServeMux_ServeHTTP(t *testing.T) {
 
 var testPaths = map[string]string{
 	"GET/a/:a/b/:b/c/:c/d/:d/e/:e/f/:f/g/:g/h/:h": "/a/a/b/b/c/c/d/d/e/e/f/f/g/g/h/h",
+	"GET/":                                             "/",
 	"GET/users":                                        "/users",
 	"GET/comments":                                     "/comments/",
 	"GET/users/cleanup":                                "/users/cleanup",

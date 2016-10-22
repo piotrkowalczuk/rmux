@@ -223,6 +223,21 @@ func newNode(res string, kind int) *node {
 }
 
 func (n *node) add(path []string, h http.Handler, idx int) *node {
+	if n == nil {
+		n = &node{}
+	}
+
+	// for example GET/
+	if len(path) == 0 && idx == 0 {
+		nn := &node{
+			end:     true,
+			handler: h,
+			kind:    nodeKindStatic,
+		}
+		n.static[""] = nn
+		return nn
+	}
+
 	if len(path) == 0 || idx >= len(path) {
 		return nil
 	}
@@ -233,11 +248,9 @@ func (n *node) add(path []string, h http.Handler, idx int) *node {
 		res string
 	)
 
-	if n == nil {
-		n = &node{}
+	if len(path) > 0 {
+		res = path[idx]
 	}
-
-	res = path[idx]
 
 	if isStatic(res) {
 		if n.static == nil {
