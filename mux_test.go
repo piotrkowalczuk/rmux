@@ -83,8 +83,17 @@ func TestServeMux_ServeHTTP(t *testing.T) {
 		})
 	}
 
-	t.Run("not found handler", func(t *testing.T) {
+	t.Run("not found - wrong path", func(t *testing.T) {
 		resp, err := http.Get(ts.URL + "/SOMETHING-THAT-DOES-NOT-EXISTS")
+		if err != nil {
+			t.Fatalf("unexpected error: %s", err.Error())
+		}
+		if resp.StatusCode != http.StatusNotFound {
+			t.Errorf("wrong status code: expected %s but got %s", http.StatusText(http.StatusNotFound), http.StatusText(resp.StatusCode))
+		}
+	})
+	t.Run("not found - wrong method", func(t *testing.T) {
+		resp, err := http.Head(ts.URL + "/SOMETHING-THAT-DOES-NOT-EXISTS")
 		if err != nil {
 			t.Fatalf("unexpected error: %s", err.Error())
 		}
