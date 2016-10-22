@@ -90,7 +90,7 @@ func (sm *ServeMux) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		if args.len > 0 {
+		if len(args.keys) > 0 {
 			r = r.WithContext(newContext(sm.ctx, args))
 		} else {
 			r = r.WithContext(sm.ctx)
