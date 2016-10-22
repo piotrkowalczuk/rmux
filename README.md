@@ -2,6 +2,14 @@
 
 RESTful router, that supports path variables. Requires Go version 1.7+.
 
+## Features
+
+* sinatra like path parameters - `/users/:id`
+* no extra dependencies
+* compatible with [http.ServeMux](https://golang.org/pkg/net/http/#ServeMux)
+* middleware like system using [rmux.Interceptor](https://godoc.org/github.com/piotrkowalczuk/rmux#Interceptor) interface
+* context handled by [http.Request.WithContext](https://golang.org/pkg/net/http/#Request.WithContext)
+
 ## Example 
 
 ```go

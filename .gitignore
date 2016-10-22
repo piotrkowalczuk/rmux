@@ -3,3 +3,4 @@ example/example
 *.iml
 *.out
 coverage.*
+*.sh
