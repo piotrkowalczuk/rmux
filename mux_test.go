@@ -96,3 +96,44 @@ var testPaths = map[string]string{
 	"DELETE/authorizations/:id":                        "/authorizations/1",
 	"GET/applications/:client_id/tokens/:access_token": "/applications/1/tokens/123456789",
 }
+
+func TestServeMux_GoString(t *testing.T) {
+	mux := rmux.NewServeMux(rmux.ServeMuxOpts{})
+	mux.Handle("GET/user/deactivate", http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+		rw.WriteHeader(http.StatusForbidden)
+	}))
+
+	got := mux.GoString()
+	expected := `{
+	"GET": {
+		"Resource": "GET",
+		"End": false,
+		"Kind": 0,
+		"Handler": false,
+		"NonStatic": null,
+		"Static": {
+			"user": {
+				"Resource": "user",
+				"End": false,
+				"Kind": 1,
+				"Handler": false,
+				"NonStatic": null,
+				"Static": {
+					"deactivate": {
+						"Resource": "deactivate",
+						"End": true,
+						"Kind": 1,
+						"Handler": true,
+						"NonStatic": null,
+						"Static": {}
+					}
+				}
+			}
+		}
+	}
+}`
+
+	if got != expected {
+		t.Errorf("wrong output, expected:\n	%s but got:\n	%s", expected, got)
+	}
+}
